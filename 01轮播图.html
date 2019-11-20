@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<link rel="stylesheet" type="text/css" href="css/01.css"/>
+		<script src="js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				//优化自动获取图片个数
+				var size = $(".img li").size();
+				for (var i=1;i<=size;i++){
+					var li ="<li>"+i+"</li>"
+					$(".num").append(li)
+				}
+				$(".num li:eq(0)").addClass("active")
+				
+				
+				$(".banner ul.img li").eq(0).show()
+				//为数字按钮添加鼠标移入事件
+				$("ul.num li").mouseover(function(){
+				$(this).addClass("active").siblings().removeClass("active")
+				var index = $(this).index()
+				$(".img li").eq(index).stop().fadeIn(300).siblings().fadeOut(300)
+				});
+				var t = setInterval(move,2000)
+				var i = 0;
+				function move(){
+						i++;
+						if(i==size){
+							i=0;
+						}
+						$(".img li").eq(i).stop().fadeIn(300).siblings().fadeOut(300)
+						$(".num li").eq(i).addClass("active").siblings().removeClass("active")
+				}
+				function move_left(){
+					i--;
+					if(i==-1){
+						i = 4
+					}
+					$(".img li").eq(i).stop().fadeIn(300).siblings().fadeOut(300)
+					$(".num li").eq(i).addClass("active").siblings().removeClass("active")
+				}
+				
+				$('.banner').hover(function(){clearInterval(t);},
+				function(){t = setInterval(move,1500);})
+//				$('.banner').hover(function(){clearInterval(t);},
+//				function(){t = setInterval(move,2000);})
+				$(".left").click(move_left)
+				$(".right").click(move)
+			
+			})		
+		</script>
+	</head>
+	
+	
+	<body>
+		<div class="banner">
+			<ul class="img">
+				<li><a href=""><img src="img/1.jpg"/></a></li>
+				<li><a href=""><img src="img/2.jpg"/></a></li>
+				<li><a href=""><img src="img/3.jpg"/></a></li>
+				<li><a href=""><img src="img/4.jpg"/></a></li>
+				<li><a href=""><img src="img/5.jpg"/></a></li>
+			</ul>
+			
+			<ul class="num">
+				
+			</ul>
+			<div class="btn left">&lt;</div>
+			<div class="btn right">&gt;</div>
+		</div>
+	</body>
+</html>
