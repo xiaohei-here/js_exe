@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+	<style>
+		* {margin: 0; padding: 0}
+		div { font-size: 60px; position: absolute;}
+	</style>
+</head>
+<body>
+    <script>
+	function numRandom(e,t){
+			return parseInt(e+Math.random()*(t-e+1))
+		}
+	setInterval(function(){
+		var div = document.createElement("div");
+		// 随机生成大写字母、
+		var letter = String.fromCharCode(numRandom(65,90))
+		console.log(letter);
+		div.innerHTML = letter;
+		div.style.left = numRandom(200,1000) + "px";
+		document.body.appendChild(div);
+		move(div)},500)
+		
+	function move(obj){
+		var speed = numRandom(1,3);
+		var timer = setInterval(function(){
+			if(obj.offsetTop >= 500){
+				obj.remove()
+				clearInterval(timer);
+			}else{
+				obj.style.top = obj.offsetTop+speed+"px";
+			}
+			
+		},30)
+	}
+	
+	document.onkeydown = function(e){
+		var e = e||event;
+		var code = e.keyCode || e.which;
+		// 按键转为字符
+		var str = String.fromCharCode(code);
+		var aDiv = document.getElementsByTagName("div");
+		for(var i=0;i<aDiv.length;i++){
+		if(str == aDiv[i].innerHTML){
+			aDiv[i].remove();
+			break;
+			}
+		}
+		
+	}
+	
+	</script>
+</body>
+</html>
