@@ -1,14 +1,20 @@
 <template>
-	<div id="home" class="page">
+	<app-content>
 		<h1>首页</h1>
-	</div>
+	</app-content>
 </template>
 
 <script>
-import AppContent from '../../common/content.vue'
+import {getHomeBannerData} from '../../services/homeService.js'
 export default {
-	components: {
-		AppContent
+	data(){
+		return{
+		
+		}
+	},
+	mounted(){
+		// 请求首页轮播图的数据
+		getHomeBannerData();
 	}
 }
 </script>
