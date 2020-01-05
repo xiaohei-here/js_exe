@@ -7,7 +7,7 @@ import City from '../pages/common/City.vue'
 import Cinemas from '../pages/cinemas/index.vue'
 import Films from '../pages/films/index.vue'
 import Home from '../pages/home/index.vue'
-import Mine from '../pages/home/index.vue'
+import Mine from '../pages/mine/index.vue'
 import Shops from '../pages/shops/index.vue'
 import Cards from '../pages/Cards/index.vue'
 
@@ -15,6 +15,12 @@ const routes = [
 	{
 		name: 'home',
 		path: '/home',
+		component: Home,
+		alias: '/',
+	},
+	{
+		name: 'films',
+		path: '/films',
 		component: Home,
 		alias: '/',
 	},
@@ -49,3 +55,9 @@ const routes = [
 export default new Router({
 	routes
 })
+
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location){
+	return originalPush.call(this,location).catch(err => err)
+}
+
